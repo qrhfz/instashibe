@@ -6,21 +6,43 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-// import 'package:path_provider/path_provider.dart';
-// import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:shibagram/api/favorite_hive.dart';
 
-class ViewShibe extends StatelessWidget {
+class ViewShibe extends StatefulWidget {
   ViewShibe({Key? key}) : super(key: key);
+
+  @override
+  _ViewShibeState createState() => _ViewShibeState();
+}
+
+class _ViewShibeState extends State<ViewShibe> {
   final dio = Dio();
+  bool isFav = false;
   final Random random = Random();
+
   @override
   Widget build(BuildContext context) {
     final data = Get.arguments;
-
+    final favController = FavController();
+    setState(() {
+      isFav = favController.isFav(data.toString());
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text('View Shiba'),
         actions: [
+          IconButton(
+            onPressed: () {
+              isFav
+                  ? favController.removeFav(data.toString())
+                  : favController.addFav(data.toString());
+              setState(() {
+                isFav = !isFav;
+              });
+            },
+            icon: Icon(isFav ? Icons.favorite : Icons.favorite_border),
+            color: Colors.red,
+          ),
           IconButton(
               onPressed: () async {
                 if (await Permission.storage.request().isGranted) {
@@ -38,6 +60,9 @@ class ViewShibe extends StatelessWidget {
         child: Hero(
           tag: data.toString(),
           child: CachedNetworkImage(
+            fit: BoxFit.fitWidth,
+            memCacheWidth: 360,
+            maxWidthDiskCache: 1080,
             placeholder: (context, url) =>
                 const Image(image: AssetImage('assets/placeholder.bmp')),
             imageUrl: data.toString(),

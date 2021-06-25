@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shibagram/api/shibe_api.dart';
+import 'package:shibagram/pages/favorites.dart';
 import 'package:shibagram/pages/view_shibe.dart';
+import 'package:shibagram/widgets/mydrawer.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -29,6 +31,7 @@ class Home extends StatelessWidget {
         centerTitle: true,
         title: const Text('Shibagram'),
       ),
+      drawer: const MyDrawer(),
       body: Obx(
         () => RefreshIndicator(
           onRefresh: () => c.refreshShibe(),
@@ -43,6 +46,7 @@ class Home extends StatelessWidget {
                         tag: c.shibes[index].toString(),
                         child: CachedNetworkImage(
                           memCacheWidth: 360,
+                          maxWidthDiskCache: 1080,
                           placeholder: (context, url) => const Image(
                               image: AssetImage('assets/placeholder.bmp')),
                           imageUrl: c.shibes[index].toString(),
