@@ -15,8 +15,10 @@ class MyDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
               padding: EdgeInsets.zero,
-              child: Container(
-                color: Theme.of(context).primaryColor,
+              child: Image.asset(
+                'assets/banner.jpg',
+                width: double.infinity,
+                fit: BoxFit.cover,
               )),
           ListTile(
             leading: const Icon(Icons.home),
@@ -26,7 +28,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.favorite),
             title: const Text('Favorite Shibes'),
-            onTap: () => Get.off(() => Favorites(), popGesture: true),
+            onTap: () => Get.off(() => const Favorites(), popGesture: true),
           )
         ],
       ),

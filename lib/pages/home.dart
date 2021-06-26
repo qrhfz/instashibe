@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shibagram/api/shibe_api.dart';
-import 'package:shibagram/pages/favorites.dart';
+import 'package:shibagram/pages/about.dart';
 import 'package:shibagram/pages/view_shibe.dart';
 import 'package:shibagram/widgets/mydrawer.dart';
 
@@ -29,7 +29,21 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Shibagram'),
+        title: const Text('Instashibe'),
+        actions: [
+          PopupMenuButton<int>(onSelected: (value) {
+            if (value == 1) {
+              Get.to(() => const About());
+            }
+          }, itemBuilder: (context) {
+            return [
+              const PopupMenuItem<int>(
+                value: 1,
+                child: Text('About'),
+              )
+            ];
+          })
+        ],
       ),
       drawer: const MyDrawer(),
       body: Obx(
@@ -39,7 +53,7 @@ class Home extends StatelessWidget {
               controller: scrollController,
               itemCount: c.shibes.length,
               itemBuilder: (BuildContext context, int index) => GestureDetector(
-                    onTap: () => Get.to(() => ViewShibe(),
+                    onTap: () => Get.to(() => const ViewShibe(),
                         arguments: c.shibes[index].toString()),
                     child: Card(
                       child: Hero(
@@ -48,7 +62,7 @@ class Home extends StatelessWidget {
                           memCacheWidth: 360,
                           maxWidthDiskCache: 1080,
                           placeholder: (context, url) => const Image(
-                              image: AssetImage('assets/placeholder.bmp')),
+                              image: AssetImage('assets/placeholder.jpg')),
                           imageUrl: c.shibes[index].toString(),
                         ),
                       ),
@@ -83,7 +97,7 @@ class Controller extends GetxController {
           this.shibes.add(shibe.toString());
         }
       }
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       Get.defaultDialog(
           title: 'Error', middleText: 'Sorry something is not right');
     }

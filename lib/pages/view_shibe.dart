@@ -9,7 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shibagram/api/favorite_hive.dart';
 
 class ViewShibe extends StatefulWidget {
-  ViewShibe({Key? key}) : super(key: key);
+  const ViewShibe({Key? key}) : super(key: key);
 
   @override
   _ViewShibeState createState() => _ViewShibeState();
@@ -29,7 +29,7 @@ class _ViewShibeState extends State<ViewShibe> {
     });
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View Shiba'),
+        title: const Text('View Shibe'),
         actions: [
           IconButton(
             onPressed: () {
@@ -60,11 +60,12 @@ class _ViewShibeState extends State<ViewShibe> {
         child: Hero(
           tag: data.toString(),
           child: CachedNetworkImage(
-            fit: BoxFit.fitWidth,
-            memCacheWidth: 360,
+            width: double.infinity,
+            fit: BoxFit.contain,
+            // memCacheWidth: 360,
             maxWidthDiskCache: 1080,
             placeholder: (context, url) =>
-                const Image(image: AssetImage('assets/placeholder.bmp')),
+                const Image(image: AssetImage('assets/placeholder.jpg')),
             imageUrl: data.toString(),
           ),
         ),

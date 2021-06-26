@@ -7,7 +7,7 @@ import 'package:shibagram/pages/view_shibe.dart';
 import 'package:shibagram/widgets/mydrawer.dart';
 
 class Favorites extends StatefulWidget {
-  Favorites({Key? key}) : super(key: key);
+  const Favorites({Key? key}) : super(key: key);
 
   @override
   _FavoritesState createState() => _FavoritesState();
@@ -35,7 +35,7 @@ class _FavoritesState extends State<Favorites> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Shibagram'),
+        title: const Text('Favorite Shibes'),
       ),
       drawer: const MyDrawer(),
       body: StaggeredGridView.builder(
@@ -43,9 +43,9 @@ class _FavoritesState extends State<Favorites> {
         itemCount: shibes!.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            onTap: () =>
-                Get.to(() => ViewShibe(), arguments: shibes![index].toString())!
-                    .then((_) {
+            onTap: () => Get.to(() => const ViewShibe(),
+                    arguments: shibes![index].toString())!
+                .then((_) {
               setState(() {
                 shibes = c.getAllFav();
               });
@@ -57,7 +57,7 @@ class _FavoritesState extends State<Favorites> {
                   memCacheWidth: 360,
                   maxWidthDiskCache: 1080,
                   placeholder: (context, url) =>
-                      const Image(image: AssetImage('assets/placeholder.bmp')),
+                      const Image(image: AssetImage('assets/placeholder.jpg')),
                   imageUrl: shibes![index].toString(),
                 ),
               ),
