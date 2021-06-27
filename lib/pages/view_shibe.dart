@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shibagram/api/favorite_hive.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ViewShibe extends StatefulWidget {
   const ViewShibe({Key? key}) : super(key: key);
@@ -43,6 +45,13 @@ class _ViewShibeState extends State<ViewShibe> {
             icon: Icon(isFav ? Icons.favorite : Icons.favorite_border),
             color: Colors.red,
           ),
+          IconButton(
+              onPressed: () async {
+                final cache = DefaultCacheManager();
+                final file = await cache.getSingleFile(data.toString());
+                Share.shareFiles([file.path]);
+              },
+              icon: const Icon(Icons.share)),
           IconButton(
               onPressed: () async {
                 if (await Permission.storage.request().isGranted) {
