@@ -7,6 +7,7 @@ import 'package:shibagram/controller/home_controller.dart';
 import 'package:shibagram/pages/about.dart';
 import 'package:shibagram/pages/view_shibe.dart';
 import 'package:shibagram/widgets/mydrawer.dart';
+import 'package:shibagram/widgets/shibe_card.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -56,14 +57,15 @@ class Home extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) => GestureDetector(
               onTap: () => Get.to(() => const ViewShibe(),
                   arguments: c.shibes[index].toString()),
-              child: Card(
-                child: CachedNetworkImage(
-                  memCacheWidth: 360,
-                  maxWidthDiskCache: 1080,
-                  placeholder: (context, url) => const Icon(Icons.donut_large),
-                  imageUrl: c.shibes[index].toString(),
-                ),
-              ),
+              child: ShibeCard(c.shibes[index].toString()),
+              // Card(
+              //   child: CachedNetworkImage(
+              //     memCacheWidth: 360,
+              //     maxWidthDiskCache: 1080,
+              //     placeholder: (context, url) => const Icon(Icons.donut_large),
+              //     imageUrl: c.shibes[index].toString(),
+              //   ),
+              // ),
             ),
             gridDelegate: SliverStaggeredGridDelegateWithFixedCrossAxisCount(
               staggeredTileCount: c.shibes.length,
