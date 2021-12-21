@@ -37,7 +37,10 @@ class Home extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () => Get.to(() => const Favorites()),
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(
+              Icons.favorite,
+              color: Color(0xffc00000),
+            ),
           ),
           PopupMenuButton<int>(
             onSelected: (value) {
