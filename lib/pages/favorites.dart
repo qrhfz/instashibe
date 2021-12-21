@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:shibagram/api/favorite_hive.dart';
 import 'package:shibagram/pages/view_shibe.dart';
 import 'package:shibagram/widgets/mydrawer.dart';
+import 'package:shibagram/widgets/shibe_card.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({Key? key}) : super(key: key);
@@ -30,17 +31,17 @@ class _FavoritesState extends State<Favorites> {
 
   @override
   Widget build(BuildContext context) {
-    shibes = c.getAllFav();
+    shibes = c.getAllFav().reversed.toList();
+
     scrollController.addListener(_scrollListener);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Favorite Shibes'),
       ),
-      // drawer: const MyDrawer(),
       body: StaggeredGridView.builder(
         controller: scrollController,
-        itemCount: shibes!.length,
+        itemCount: shibes?.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => Get.to(() => const ViewShibe(),
@@ -50,17 +51,7 @@ class _FavoritesState extends State<Favorites> {
                 shibes = c.getAllFav();
               });
             }),
-            child: Card(
-              child: CachedNetworkImage(
-                memCacheWidth: 360,
-                maxWidthDiskCache: 1080,
-                placeholder: (context, url) => AspectRatio(
-                  aspectRatio: 1,
-                  child: Container(color: Colors.grey.shade200),
-                ),
-                imageUrl: shibes![index].toString(),
-              ),
-            ),
+            child: ShibeCard(shibes![index].toString()),
           );
         },
         gridDelegate: SliverStaggeredGridDelegateWithFixedCrossAxisCount(
@@ -72,26 +63,3 @@ class _FavoritesState extends State<Favorites> {
     );
   }
 }
-
-// class FavPageController extends GetxController {
-//   Box favs = Hive.box('favs');
-//   RxList shibes = [].obs;
-//   // ignore: avoid_void_async
-//   Future<void> refreshShibe() async {
-//     shibes.clear();
-//     await getShibe();
-//   }
-
-//   Future<void> getShibe() async {
-//     try {
-//       int x = 0;
-//       while (favs.getAt(x) != null) {
-//         shibes.add(favs.getAt(x));
-//         x++;
-//       }
-//     } on Exception catch (e) {
-//       Get.defaultDialog(
-//           title: 'Error', middleText: 'Sorry something is not right');
-//     }
-//   }
-// }
