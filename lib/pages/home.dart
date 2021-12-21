@@ -71,6 +71,8 @@ class Home extends StatelessWidget {
               staggeredTileCount: c.shibes.length,
               crossAxisCount: 2,
               staggeredTileBuilder: (_) => const StaggeredTile.fit(1),
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
             ),
           ),
         ),
