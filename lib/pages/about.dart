@@ -14,17 +14,17 @@ class About extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Created by qori.dev, with flutter 💙'),
-            const SizedBox(
+          children: const [
+            Text('Created by qori.dev, with flutter 💙'),
+            SizedBox(
               height: 8,
             ),
-            const Text('Pics of shibes are from shibe.online'),
-            const SizedBox(
+            Text('Pics of shibes are from shibe.online'),
+            SizedBox(
               height: 8,
             ),
-            const Text('Shiba Vectors by Vecteezy'),
-            const Text('https://www.vecteezy.com/free-vector/shiba')
+            Text('Shiba Vectors by Vecteezy'),
+            Text('https://www.vecteezy.com/free-vector/shiba')
           ],
         ),
       ),
