@@ -9,6 +9,8 @@ import 'package:shibagram/pages/view_shibe.dart';
 import 'package:shibagram/widgets/mydrawer.dart';
 import 'package:shibagram/widgets/shibe_card.dart';
 
+import 'favorites.dart';
+
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
   final Controller c = Get.put(Controller());
@@ -31,9 +33,12 @@ class Home extends StatelessWidget {
     scrollController.addListener(_scrollListener);
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text('Instashibe'),
         actions: [
+          IconButton(
+            onPressed: () => Get.to(() => const Favorites()),
+            icon: const Icon(Icons.favorite),
+          ),
           PopupMenuButton<int>(
             onSelected: (value) {
               if (value == 1) {
@@ -51,7 +56,7 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      drawer: const MyDrawer(),
+      // drawer: const MyDrawer(),
       body: Obx(
         () => RefreshIndicator(
           onRefresh: () => c.refreshShibe(),
