@@ -15,7 +15,8 @@ class Home extends StatelessWidget {
   final scrollController = ScrollController();
 
   void _scrollListener() {
-    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+    if (scrollController.offset >=
+            scrollController.position.maxScrollExtent * 0.6 &&
         !scrollController.position.outOfRange) {
       c.getShibe();
     }
@@ -33,18 +34,21 @@ class Home extends StatelessWidget {
         centerTitle: true,
         title: const Text('Instashibe'),
         actions: [
-          PopupMenuButton<int>(onSelected: (value) {
-            if (value == 1) {
-              Get.to(() => const About());
-            }
-          }, itemBuilder: (context) {
-            return [
-              const PopupMenuItem<int>(
-                value: 1,
-                child: Text('About'),
-              )
-            ];
-          })
+          PopupMenuButton<int>(
+            onSelected: (value) {
+              if (value == 1) {
+                Get.to(() => const About());
+              }
+            },
+            itemBuilder: (context) {
+              return [
+                const PopupMenuItem<int>(
+                  value: 1,
+                  child: Text('About'),
+                )
+              ];
+            },
+          )
         ],
       ),
       drawer: const MyDrawer(),

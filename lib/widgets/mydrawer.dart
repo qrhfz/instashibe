@@ -23,12 +23,12 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text('Home'),
-            onTap: () => Get.off(() => Home(), popGesture: true),
+            onTap: () => Get.to(() => Home()),
           ),
           ListTile(
             leading: const Icon(Icons.favorite),
             title: const Text('Favorite Shibes'),
-            onTap: () => Get.off(() => const Favorites(), popGesture: true),
+            onTap: () => Get.to(() => const Favorites()),
           )
         ],
       ),

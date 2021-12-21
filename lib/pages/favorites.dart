@@ -37,7 +37,7 @@ class _FavoritesState extends State<Favorites> {
         centerTitle: true,
         title: const Text('Favorite Shibes'),
       ),
-      drawer: const MyDrawer(),
+      // drawer: const MyDrawer(),
       body: StaggeredGridView.builder(
         controller: scrollController,
         itemCount: shibes!.length,
@@ -51,15 +51,14 @@ class _FavoritesState extends State<Favorites> {
               });
             }),
             child: Card(
-              child: Hero(
-                tag: shibes![index].toString(),
-                child: CachedNetworkImage(
-                  memCacheWidth: 360,
-                  maxWidthDiskCache: 1080,
-                  placeholder: (context, url) =>
-                      const Image(image: AssetImage('assets/placeholder.jpg')),
-                  imageUrl: shibes![index].toString(),
+              child: CachedNetworkImage(
+                memCacheWidth: 360,
+                maxWidthDiskCache: 1080,
+                placeholder: (context, url) => AspectRatio(
+                  aspectRatio: 1,
+                  child: Container(color: Colors.grey.shade200),
                 ),
+                imageUrl: shibes![index].toString(),
               ),
             ),
           );

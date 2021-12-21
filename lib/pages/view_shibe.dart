@@ -9,6 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shibagram/api/favorite_hive.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ViewShibe extends StatefulWidget {
   const ViewShibe({Key? key}) : super(key: key);
@@ -43,7 +44,6 @@ class _ViewShibeState extends State<ViewShibe> {
               });
             },
             icon: Icon(isFav ? Icons.favorite : Icons.favorite_border),
-            color: Colors.red,
           ),
           IconButton(
               onPressed: () async {
@@ -73,8 +73,13 @@ class _ViewShibeState extends State<ViewShibe> {
             fit: BoxFit.contain,
             // memCacheWidth: 360,
             maxWidthDiskCache: 1080,
-            placeholder: (context, url) =>
-                const Image(image: AssetImage('assets/placeholder.jpg')),
+            placeholder: (context, url) => Shimmer.fromColors(
+              baseColor: Colors.grey.shade200,
+              highlightColor: Colors.grey.shade100,
+              child: Container(
+                color: Colors.grey.shade200,
+              ),
+            ),
             imageUrl: data.toString(),
           ),
         ),
