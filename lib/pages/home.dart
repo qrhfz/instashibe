@@ -1,12 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:shibagram/api/shibe_api.dart';
 import 'package:shibagram/controller/home_controller.dart';
 import 'package:shibagram/pages/about.dart';
 import 'package:shibagram/pages/view_shibe.dart';
-import 'package:shibagram/widgets/mydrawer.dart';
 import 'package:shibagram/widgets/shibe_card.dart';
 
 import 'favorites.dart';

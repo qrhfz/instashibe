@@ -1,10 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shibagram/api/favorite_hive.dart';
 import 'package:shibagram/pages/view_shibe.dart';
-import 'package:shibagram/widgets/mydrawer.dart';
 import 'package:shibagram/widgets/shibe_card.dart';
 
 class Favorites extends StatefulWidget {

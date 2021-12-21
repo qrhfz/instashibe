@@ -4,12 +4,12 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:shibagram/api/favorite_hive.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shibagram/api/favorite_hive.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ViewShibe extends StatefulWidget {
