@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shibagram/api/shibe_api.dart';
+import 'package:shibagram/controller/home_controller.dart';
 import 'package:shibagram/pages/about.dart';
 import 'package:shibagram/pages/view_shibe.dart';
 import 'package:shibagram/widgets/mydrawer.dart';
@@ -50,56 +51,28 @@ class Home extends StatelessWidget {
         () => RefreshIndicator(
           onRefresh: () => c.refreshShibe(),
           child: StaggeredGridView.builder(
-              controller: scrollController,
-              itemCount: c.shibes.length,
-              itemBuilder: (BuildContext context, int index) => GestureDetector(
-                    onTap: () => Get.to(() => const ViewShibe(),
-                        arguments: c.shibes[index].toString()),
-                    child: Card(
-                      child: Hero(
-                        tag: c.shibes[index].toString(),
-                        child: CachedNetworkImage(
-                          memCacheWidth: 360,
-                          maxWidthDiskCache: 1080,
-                          placeholder: (context, url) => const Image(
-                              image: AssetImage('assets/placeholder.jpg')),
-                          imageUrl: c.shibes[index].toString(),
-                        ),
-                      ),
-                    ),
-                  ),
-              gridDelegate: SliverStaggeredGridDelegateWithFixedCrossAxisCount(
-                staggeredTileCount: c.shibes.length,
-                crossAxisCount: 2,
-                staggeredTileBuilder: (_) => const StaggeredTile.fit(1),
-              )),
+            controller: scrollController,
+            itemCount: c.shibes.length,
+            itemBuilder: (BuildContext context, int index) => GestureDetector(
+              onTap: () => Get.to(() => const ViewShibe(),
+                  arguments: c.shibes[index].toString()),
+              child: Card(
+                child: CachedNetworkImage(
+                  memCacheWidth: 360,
+                  maxWidthDiskCache: 1080,
+                  placeholder: (context, url) => const Icon(Icons.donut_large),
+                  imageUrl: c.shibes[index].toString(),
+                ),
+              ),
+            ),
+            gridDelegate: SliverStaggeredGridDelegateWithFixedCrossAxisCount(
+              staggeredTileCount: c.shibes.length,
+              crossAxisCount: 2,
+              staggeredTileBuilder: (_) => const StaggeredTile.fit(1),
+            ),
+          ),
         ),
       ),
     );
-  }
-}
-
-class Controller extends GetxController {
-  final shibeApi = ShibeApi();
-  RxList shibes = [].obs;
-  // ignore: avoid_void_async
-  Future<void> refreshShibe() async {
-    shibes.clear();
-    await getShibe();
-  }
-
-  Future<void> getShibe() async {
-    try {
-      final shibes = await shibeApi.getShibe();
-
-      for (final shibe in shibes) {
-        if (!this.shibes.contains(shibe)) {
-          this.shibes.add(shibe.toString());
-        }
-      }
-    } on Exception catch (_) {
-      Get.defaultDialog(
-          title: 'Error', middleText: 'Sorry something is not right');
-    }
   }
 }
