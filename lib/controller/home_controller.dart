@@ -3,7 +3,7 @@ import 'package:shibagram/api/shibe_api.dart';
 
 class Controller extends GetxController {
   final shibeApi = ShibeApi();
-  RxList shibes = [].obs;
+  RxList<String> shibes = <String>[].obs;
   // ignore: avoid_void_async
   Future<void> refreshShibe() async {
     shibes.clear();
@@ -16,12 +16,14 @@ class Controller extends GetxController {
 
       for (final shibe in shibes) {
         if (!this.shibes.contains(shibe)) {
-          this.shibes.add(shibe.toString());
+          this.shibes.add(shibe);
         }
       }
     } on Exception catch (_) {
       Get.defaultDialog(
-          title: 'Error', middleText: 'Sorry something is not right');
+        title: 'Error',
+        middleText: 'Sorry something is not right',
+      );
     }
   }
 }

@@ -6,7 +6,7 @@ import 'package:shibagram/pages/view_shibe.dart';
 import 'package:shibagram/widgets/shibe_card.dart';
 
 class Favorites extends StatefulWidget {
-  const Favorites({Key? key}) : super(key: key);
+  const Favorites({super.key});
 
   @override
   _FavoritesState createState() => _FavoritesState();
@@ -42,8 +42,10 @@ class _FavoritesState extends State<Favorites> {
         itemCount: shibes?.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            onTap: () => Get.to(() => const ViewShibe(),
-                    arguments: shibes![index].toString())!
+            onTap: () => Get.to(
+              () => const ViewShibe(),
+              arguments: shibes![index].toString(),
+            )!
                 .then((_) {
               setState(() {
                 shibes = c.getAllFav();

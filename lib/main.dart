@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'pages/home.dart';
+import 'package:shibagram/pages/home.dart';
 
 void main() async {
   await Hive.initFlutter();

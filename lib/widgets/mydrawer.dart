@@ -4,9 +4,7 @@ import 'package:shibagram/pages/favorites.dart';
 import 'package:shibagram/pages/home.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({
-    Key? key,
-  }) : super(key: key);
+  const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +12,13 @@ class MyDrawer extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(
-              padding: EdgeInsets.zero,
-              child: Image.asset(
-                'assets/banner.jpg',
-                width: double.infinity,
-                fit: BoxFit.cover,
-              )),
+            padding: EdgeInsets.zero,
+            child: Image.asset(
+              'assets/banner.jpg',
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+          ),
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text('Home'),

@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:photo_view/photo_view.dart';
+// import 'package:photo_view/photo_view.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shibagram/api/favorite_hive.dart';
-import 'package:shimmer/shimmer.dart';
+// import 'package:shimmer/shimmer.dart';
 
 class ViewShibe extends StatefulWidget {
-  const ViewShibe({Key? key}) : super(key: key);
+  const ViewShibe({super.key});
 
   @override
   _ViewShibeState createState() => _ViewShibeState();
@@ -47,37 +47,31 @@ class _ViewShibeState extends State<ViewShibe> {
             icon: Icon(isFav ? Icons.favorite : Icons.favorite_border),
           ),
           IconButton(
-              onPressed: () async {
-                final cache = DefaultCacheManager();
-                final file = await cache.getSingleFile(data.toString());
-                Share.shareFiles([file.path]);
-              },
-              icon: const Icon(Icons.share)),
+            onPressed: () async {
+              final cache = DefaultCacheManager();
+              final file = await cache.getSingleFile(data.toString());
+              Share.shareFiles([file.path]);
+            },
+            icon: const Icon(Icons.share),
+          ),
           IconButton(
-              onPressed: () async {
-                if (await Permission.storage.request().isGranted) {
-                  const dir = '/storage/emulated/0/Download';
-                  dio.download(
-                      data.toString(), '$dir/${random.nextInt(10000)}.jpg');
-                }
+            onPressed: () async {
+              if (await Permission.storage.request().isGranted) {
+                const dir = '/storage/emulated/0/Download';
+                dio.download(
+                  data.toString(),
+                  '$dir/${random.nextInt(10000)}.jpg',
+                );
+              }
 
-                // final dir = (await getApplicationDocumentsDirectory()).path;
-              },
-              icon: const Icon(Icons.download))
+              // final dir = (await getApplicationDocumentsDirectory()).path;
+            },
+            icon: const Icon(Icons.download),
+          )
         ],
       ),
       body: Center(
-        child: PhotoView(
-          backgroundDecoration: BoxDecoration(color: Colors.grey.shade200),
-          loadingBuilder: (_, __) => Shimmer.fromColors(
-            baseColor: Colors.grey.shade200,
-            highlightColor: Colors.grey.shade100,
-            child: Container(
-              color: Colors.grey.shade200,
-            ),
-          ),
-          imageProvider: CachedNetworkImageProvider(data.toString()),
-        ),
+        child: CachedNetworkImage(imageUrl: data.toString()),
       ),
     );
   }

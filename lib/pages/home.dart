@@ -3,13 +3,12 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shibagram/controller/home_controller.dart';
 import 'package:shibagram/pages/about.dart';
+import 'package:shibagram/pages/favorites.dart';
 import 'package:shibagram/pages/view_shibe.dart';
 import 'package:shibagram/widgets/shibe_card.dart';
 
-import 'favorites.dart';
-
 class Home extends StatelessWidget {
-  Home({Key? key}) : super(key: key);
+  Home({super.key});
   final Controller c = Get.put(Controller());
   final scrollController = ScrollController();
 
@@ -64,9 +63,11 @@ class Home extends StatelessWidget {
             controller: scrollController,
             itemCount: c.shibes.length,
             itemBuilder: (BuildContext context, int index) => GestureDetector(
-              onTap: () => Get.to(() => const ViewShibe(),
-                  arguments: c.shibes[index].toString()),
-              child: ShibeCard(c.shibes[index].toString()),
+              onTap: () => Get.to(
+                () => const ViewShibe(),
+                arguments: c.shibes[index],
+              ),
+              child: ShibeCard(c.shibes[index]),
               // Card(
               //   child: CachedNetworkImage(
               //     memCacheWidth: 360,
